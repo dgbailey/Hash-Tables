@@ -15,7 +15,8 @@ class Pair:
 # '''
 class BasicHashTable:
     def __init__(self, capacity):
-        pass
+        self.storage = [None]*capacity
+        self.capacity = capacity
 
 
 # '''
@@ -23,7 +24,12 @@ class BasicHashTable:
 # Research and implement the djb2 hash function
 # '''
 def hash(string, max):
-    pass
+                                                                                                                                    
+    hash = 5381
+    for x in string:
+        hash = (( hash << 5) + hash) + ord(x)
+    return hash & 0xFFFFFFFF % max
+
 
 
 # '''
@@ -32,7 +38,13 @@ def hash(string, max):
 # If you are overwriting a value with a different key, print a warning.
 # '''
 def hash_table_insert(hash_table, key, value):
-    pass
+        hashed_key = hash(key,hash_table.capacity)
+        
+        if hash_table.storage[hashed_key] != None:
+            print(f"Error: Your are overwriting a value {hash_table.storage[hashed_key].value} at {hashed_key}")
+            hash_table.storage[hashed_key] = Pair(hashed_key,value)
+        else:
+            hash_table.storage[hashed_key] = Pair(hashed_key,value)
 
 
 # '''
@@ -41,7 +53,11 @@ def hash_table_insert(hash_table, key, value):
 # If you try to remove a value that isn't there, print a warning.
 # '''
 def hash_table_remove(hash_table, key):
-    pass
+    hashed_key = hash(key,hash_table.capacity)
+    if hash_table.storage[hashed_key] is None:
+        print(f"No value found at {hashed_key}")
+    else:
+        hash_table.storage[hashed_key] = None
 
 
 # '''
@@ -50,7 +66,11 @@ def hash_table_remove(hash_table, key):
 # Should return None if the key is not found.
 # '''
 def hash_table_retrieve(hash_table, key):
-    pass
+    hashed_key = hash(key,hash_table.capacity)
+    if hash_table.storage[hashed_key] is None:
+        print(f"No value found at {hashed_key}")
+    else:
+        return hash_table.storage[hashed_key].value
 
 
 def Testing():

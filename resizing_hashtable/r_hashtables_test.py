@@ -40,6 +40,7 @@ class TestFullHashTable(unittest.TestCase):
         return_value = hash_table_retrieve(ht, "key-7")
         self.assertTrue(return_value == "val-7")
         return_value = hash_table_retrieve(ht, "key-8")
+        print("Return 8",return_value)
         self.assertTrue(return_value == "val-8")
         return_value = hash_table_retrieve(ht, "key-9")
         self.assertTrue(return_value == "val-9")
